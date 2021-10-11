@@ -3,50 +3,23 @@
     <h1>This is an demo page</h1>
     <a-row justify="center">
       <a-col :span="20">
-        <a-table :dataSource="dataSource" :columns="columns" />
+        <a-table :dataSource="data" :columns="columns" />
       </a-col>
     </a-row>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
+import { Person } from "@/module/person/person.model";
 
-export default defineComponent({
-  setup() {
-    return {
-      dataSource: [
-        {
-          key: "1",
-          name: "胡彦斌",
-          age: 32,
-          address: "西湖区湖底公园1号",
-        },
-        {
-          key: "2",
-          name: "胡彦祖",
-          age: 42,
-          address: "西湖区湖底公园1号",
-        },
-      ],
-      columns: [
-        {
-          title: "姓名",
-          dataIndex: "name",
-          key: "name",
-        },
-        {
-          title: "年龄",
-          dataIndex: "age",
-          key: "age",
-        },
-        {
-          title: "住址",
-          dataIndex: "address",
-          key: "address",
-        },
-      ],
-    };
-  },
-});
+const columns = Person.getColumns<Person>();
+const data = ref<Array<Person>>([]);
+
+const getData = async () => {
+  const response = await Person.getList<Person>();
+  data.value = response.list;
+}
+
+onMounted(() => getData());
 </script>
