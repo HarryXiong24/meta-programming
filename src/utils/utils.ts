@@ -2,16 +2,16 @@ import "reflect-metadata";
 import { ICPD } from "@/module/person/person.type";
 
 // 创建属性装饰器的方法, 返回创建的唯一键, 以及装饰函数
-export function CreatePropertyDecorator<T>(): ICPD<T> {
+export function CreateProperDecorator<T>(): ICPD<T> {
   const metaKey = Symbol();
 
-  function propertyDecoratorFunc(config: T): PropertyDecorator {
+  function properDecoratorFunc(config: T): PropertyDecorator {
     return function (target, propertyKey) {
       Reflect.defineMetadata(metaKey, config, target, propertyKey);
     };
   }
 
-  return { metaKey, propertyDecoratorFunc };
+  return { metaKey, properDecoratorFunc };
 }
 
 // 获取属性的元数据

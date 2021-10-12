@@ -1,4 +1,4 @@
-import { CreatePropertyDecorator } from "@/utils/utils";
+import { CreateProperDecorator } from "@/utils/utils";
 
 // 类装饰器的约束: 可以根据业务 给类不同的数据
 export interface ClassConfig {
@@ -15,7 +15,7 @@ export interface ClassConfig {
 // 属性装饰器的返回约束
 export type ICPD<T> = {
   metaKey: symbol;
-  propertyDecoratorFunc: (config: T) => PropertyDecorator;
+  properDecoratorFunc: (config: T) => PropertyDecorator;
 };
 
 // 后台返回字段约束
@@ -35,9 +35,9 @@ export interface TableColumn {
 export type ColumnPropertyConfig = Partial<TableColumn>;
 
 // 创建表格列的属性装饰器
-export const columnConfig = CreatePropertyDecorator<ColumnPropertyConfig>();
+export const columnConfig = CreateProperDecorator<ColumnPropertyConfig>();
 // 拿到属性装饰器
-export const ColumnDecorator = columnConfig.propertyDecoratorFunc;
+export const ColumnDecorator = columnConfig.properDecoratorFunc;
 
 // 表格抽象类
 export abstract class TableBase {
