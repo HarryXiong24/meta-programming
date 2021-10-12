@@ -11,13 +11,11 @@ import {
 } from "./person.type";
 
 // 2.类装饰器, 处理通过装饰器收集上来的元数据
-export function EnhancedTableClass(config: ClassConfig) {
-
+export function EnhancedTableClass(config: ClassConfig): any {
   const cacheColumnConfigKey = Symbol("cacheColumnConfigKey");
   const tableConfigKey = Symbol("config");
 
   return function (Target: any) {
-    
     return class EnhancedTableClass extends Target {
       constructor(data: any) {
         super(data);
@@ -109,5 +107,4 @@ export class Person extends TableBase {
     this.sex = sex;
     this.address = address;
   }
-
 }
