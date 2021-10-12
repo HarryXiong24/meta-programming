@@ -14,11 +14,15 @@ import { ref, onMounted } from "vue";
 import { Person } from "@/module/person/person.model";
 
 const columns = Person.getColumns<Person>();
+console.log("columns", columns);
+
 const data = ref<Array<Person>>([]);
+// console.log("data", data.value);
 
 const getData = async () => {
   const response = await Person.getList<Person>();
   data.value = response.list;
+  console.log("data", data.value);
 };
 
 onMounted(() => getData());

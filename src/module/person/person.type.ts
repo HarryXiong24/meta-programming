@@ -1,6 +1,6 @@
 import { CreateProperDecorator } from "@/utils/utils";
 
-// 类装饰器的约束: 可以根据业务 给类不同的数据
+// 类装饰器的约束: 可以根据业务给类不同的数据
 export interface ClassConfig {
   size?: "middle" | "small";
   bordered?: boolean;
@@ -19,7 +19,7 @@ export type ICPD<T> = {
 };
 
 // 后台返回字段约束
-export interface Pagination<T> {
+export interface Record<T> {
   total: number;
   list: T[];
 }
@@ -36,6 +36,7 @@ export type ColumnPropertyConfig = Partial<TableColumn>;
 
 // 创建表格列的属性装饰器
 export const columnConfig = CreateProperDecorator<ColumnPropertyConfig>();
+
 // 拿到属性装饰器
 export const ColumnDecorator = columnConfig.properDecoratorFunc;
 
@@ -45,7 +46,7 @@ export abstract class TableBase {
     return [];
   }
 
-  static async getList<T>(): Promise<Pagination<T>> {
+  static async getList<T>(): Promise<Record<T>> {
     return { total: 0, list: [] };
   }
 

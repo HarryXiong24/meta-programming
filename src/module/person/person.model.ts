@@ -7,10 +7,19 @@ import {
   columnConfig,
   TableColumn,
   ClassConfig,
-  Pagination,
+  Record,
 } from "./person.type";
 
-// 2.类装饰器, 处理通过装饰器收集上来的元数据
+export interface PersonConstraint {
+  key: string | number;
+  id: number;
+  name: string;
+  age: number;
+  sex: "male" | "female" | "unknow";
+  address: string;
+}
+
+// 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的(实现TableBase抽象类)
 export function EnhancedTableClass(config: ClassConfig): any {
   const cacheColumnConfigKey = Symbol("cacheColumnConfigKey");
   const tableConfigKey = Symbol("config");
@@ -30,9 +39,10 @@ export function EnhancedTableClass(config: ClassConfig): any {
         );
       }
 
-      // 获取表格列
+      // 获取表格头
       static getColumns(): TableColumn[] {
         const list: TableColumn[] = [];
+        console.log("columnConfig", EnhancedTableClass.columnConfig);
         EnhancedTableClass.columnConfig.forEach((config) =>
           list.push(config as TableColumn)
         );
@@ -40,7 +50,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
       }
 
       // 获取表格数据
-      static async getList<T>(): Promise<Pagination<T>> {
+      static async getList<T>(): Promise<Record<T>> {
         const result = await getPersonListFromServer();
 
         return {
@@ -55,7 +65,8 @@ export function EnhancedTableClass(config: ClassConfig): any {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 @EnhancedTableClass({})
-export class Person extends TableBase {
+export class Person extends TableBase implements PersonConstraint {
+  // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({
     title: "唯一标识",
     dataIndex: "id",
@@ -98,7 +109,7 @@ export class Person extends TableBase {
   })
   key: string | number = "0";
 
-  constructor({ key, id, name, age, sex, address }) {
+  constructor({ key, id, name, age, sex, address }: PersonConstraint) {
     super();
     this.id = id;
     this.key = key;

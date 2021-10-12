@@ -84,7 +84,7 @@ export const getPersonListFromServer: any = async (): Promise<any> => {
             address: "山东省青岛市",
           },
         ],
-        count: 2,
+        count: 10,
       });
     }, 500);
   });
