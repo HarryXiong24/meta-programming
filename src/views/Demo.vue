@@ -19,7 +19,7 @@ const data = ref<Array<Person>>([]);
 const getData = async () => {
   const response = await Person.getList<Person>();
   data.value = response.list;
-}
+};
 
 onMounted(() => getData());
 </script>

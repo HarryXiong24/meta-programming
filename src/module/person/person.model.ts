@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { TableBase, Column } from "./person.type";
+import { TableBase, ColumnDecorator } from "./person.type";
 import { getConfigMap } from "../../utils/utils";
 import { getPersonListFromServer } from "./person.service";
 import {
@@ -56,42 +56,42 @@ export function EnhancedTableClass(config: ClassConfig): any {
 // @ts-ignore
 @EnhancedTableClass({})
 export class Person extends TableBase {
-  @Column({
+  @ColumnDecorator({
     title: "唯一标识",
     dataIndex: "id",
     key: "0",
   })
   id = 0;
 
-  @Column({
+  @ColumnDecorator({
     title: "姓名",
     dataIndex: "name",
     key: "1",
   })
   name = "";
 
-  @Column({
+  @ColumnDecorator({
     title: "年龄",
     dataIndex: "age",
     key: "2",
   })
   age = 0;
 
-  @Column({
+  @ColumnDecorator({
     title: "性别",
     dataIndex: "sex",
     key: "3",
   })
   sex: "male" | "female" | "unknow" = "unknow";
 
-  @Column({
+  @ColumnDecorator({
     title: "地址",
     dataIndex: "address",
     key: "4",
   })
   address = "";
 
-  @Column({
+  @ColumnDecorator({
     title: "key",
     dataIndex: "key",
     key: "5",
