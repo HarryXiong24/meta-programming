@@ -52,5 +52,5 @@ export abstract class TableBase {
 
   static getConfig: () => ClassConfig;
 
-  static change: (page: number, pageSize: number) => void;
+  static pageChange: (pagination: any, pageSize: number) => void;
 }

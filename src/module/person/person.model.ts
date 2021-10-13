@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { TableBase, ColumnDecorator } from "./person.type";
-import { getConfigMap } from "../../utils/utils";
+import { getConfigMap } from '../../utils/utils';
 import { getPersonListFromServer } from "./person.service";
 import {
   ColumnPropertyConfig,
@@ -9,6 +9,7 @@ import {
   ClassConfig,
   Record,
 } from "./person.type";
+import { Ref, ref } from "vue";
 
 export interface PersonConstraint {
   key: string | number;
@@ -28,6 +29,11 @@ export function EnhancedTableClass(config: ClassConfig): any {
     return class EnhancedTableClass extends Target {
       constructor(data: any) {
         super(data);
+        Reflect.defineMetadata(
+          tableConfigKey,
+          ref<ClassConfig>(config),
+          Target
+        );
       }
 
       // 获取列上的元数据
@@ -58,13 +64,34 @@ export function EnhancedTableClass(config: ClassConfig): any {
           list: result.data.map((item: T) => new EnhancedTableClass(item)),
         };
       }
+
+      // 获取配置数据
+      static getConfig(): ClassConfig {
+        const config = Reflect.getMetadata(tableConfigKey, Target);
+        return config;
+      }
+
+      // 分页切换时
+      static pageChange(pagination: any, pageSize: number): void {
+        const oldConfig: Ref<ClassConfig> =
+          EnhancedTableClass.getConfig() as Ref<ClassConfig>;
+        oldConfig.value.pagination = pagination;
+      }
     };
   };
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-@EnhancedTableClass({})
+@EnhancedTableClass({
+  size: "middle",
+  bordered: true,
+  pagination: {
+    "show-less-items": true,
+    current: 1,
+    pageSize: 5,
+  },
+})
 export class Person extends TableBase implements PersonConstraint {
   // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({

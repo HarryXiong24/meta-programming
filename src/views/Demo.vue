@@ -3,7 +3,12 @@
     <h1>This is an demo page</h1>
     <a-row justify="center">
       <a-col :span="20">
-        <a-table :dataSource="data" :columns="columns" />
+        <a-table
+          v-bind="config"
+          :dataSource="data"
+          :columns="columns"
+          @change="pageChange"
+        />
       </a-col>
     </a-row>
   </div>
@@ -18,6 +23,8 @@ console.log("columns", columns);
 
 const data = ref<Array<Person>>([]);
 // console.log("data", data.value);
+const pageChange = Person.pageChange;
+const config = Person.getConfig();
 
 const getData = async () => {
   const response = await Person.getList<Person>();
