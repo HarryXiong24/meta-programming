@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { ref, defineExpose } from "vue";
-import { Person } from "@/model/Table/Person";
+import { Person } from "./person.table";
 import { getPersonListAPI } from "@/api/person";
 
 // Person 列表数据
