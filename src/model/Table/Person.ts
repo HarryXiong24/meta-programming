@@ -8,6 +8,7 @@ export interface PersonConstraint {
   age: number;
   sex: "male" | "female" | "unknown";
   address: string;
+  operator: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -29,6 +30,13 @@ export class Person extends TableBase implements PersonConstraint {
     key: "0",
   })
   id = 0;
+
+  @ColumnDecorator({
+    title: "key",
+    dataIndex: "key",
+    key: "5",
+  })
+  key: string | number = "0";
 
   @ColumnDecorator({
     title: "姓名",
@@ -59,13 +67,15 @@ export class Person extends TableBase implements PersonConstraint {
   address = "";
 
   @ColumnDecorator({
-    title: "key",
-    dataIndex: "key",
+    title: "操作",
+    dataIndex: "operator",
     key: "5",
+    slots: { title: "operator", customRender: "operator" },
+    width: 300,
   })
-  key: string | number = "0";
+  operator = "";
 
-  constructor({ key, id, name, age, sex, address }: PersonConstraint) {
+  constructor({ key, id, name, age, sex, address, operator }: PersonConstraint) {
     super();
     this.id = id;
     this.key = key;
@@ -73,5 +83,6 @@ export class Person extends TableBase implements PersonConstraint {
     this.age = age;
     this.sex = sex;
     this.address = address;
+    this.operator = operator;
   }
 }

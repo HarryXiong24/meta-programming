@@ -52,7 +52,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
 
         return {
           total: result.count,
-          list: result.data.map((item: T) => new EnhancedTableClass(item)),
+          list: result.data.map((item: T) => item),
         };
       }
 
@@ -66,6 +66,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
       static pageChange(pagination: any): void {
         const oldConfig: Ref<ClassConfig> =
           EnhancedTableClass.getConfig() as Ref<ClassConfig>;
+        console.log(oldConfig);
         oldConfig.value.pagination = pagination;
       }
     };

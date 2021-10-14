@@ -23,6 +23,11 @@ export interface TableColumn {
   title: string;
   dataIndex: string;
   key: string;
+  width: number;
+  slots: {
+    title?: string;
+    customRender?: string;
+  };
 }
 
 // 让TableColumn中的属性都是可选的

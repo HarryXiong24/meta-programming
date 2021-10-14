@@ -1,6 +1,7 @@
 <template>
   <div class="table">
     <h1>This is an table demo page</h1>
+    <h3>这是 Person 表格</h3>
     <a-row justify="center">
       <a-col :span="20">
         <a-table
@@ -8,7 +9,13 @@
           :dataSource="tableData"
           :columns="columns"
           @change="pageChange"
-        />
+        >
+          <template #operator="{ record }">
+            <a-button type="link" @click="info(record)">查看</a-button>
+            <a-button type="link" @click="edit(record)">编辑</a-button>
+            <a-button type="link" @click="del(record)">删除</a-button>
+          </template>
+        </a-table>
       </a-col>
     </a-row>
   </div>
@@ -29,6 +36,18 @@ const getData = async () => {
   const response = await Person.getList<Person>(getPersonListAPI);
   tableData.value = response.list;
   // console.log("data", tableData);
+};
+
+const info = (record: any) => {
+  console.log(record);
+};
+
+const edit = (record: any) => {
+  console.log(record);
+};
+
+const del = (record: any) => {
+  console.log(record);
 };
 
 onMounted(() => getData());
