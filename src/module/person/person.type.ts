@@ -12,12 +12,6 @@ export interface ClassConfig {
   };
 }
 
-// 属性装饰器的返回约束
-export type ICPD<T> = {
-  metaKey: symbol;
-  properDecoratorFunc: (config: T) => PropertyDecorator;
-};
-
 // 后台返回字段约束
 export interface Record<T> {
   total: number;

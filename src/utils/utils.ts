@@ -1,8 +1,13 @@
 import "reflect-metadata";
-import { ICPD } from "@/module/person/person.type";
+
+// 属性装饰器的返回约束
+export type DecoratorType<T> = {
+  metaKey: symbol;
+  properDecoratorFunc: (config: T) => PropertyDecorator;
+};
 
 // 创建属性装饰器的方法, 返回创建的唯一键, 以及装饰函数
-export function CreateProperDecorator<T>(): ICPD<T> {
+export function CreateProperDecorator<T>(): DecoratorType<T> {
   const metaKey = Symbol();
 
   function properDecoratorFunc(config: T): PropertyDecorator {

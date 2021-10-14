@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { TableBase, ColumnDecorator } from "./person.type";
-import { getConfigMap } from '../../utils/utils';
+import { getConfigMap } from "../../utils/utils";
 import { getPersonListFromServer } from "./person.service";
 import {
   ColumnPropertyConfig,

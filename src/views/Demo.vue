@@ -29,7 +29,7 @@ const config = Person.getConfig();
 const getData = async () => {
   const response = await Person.getList<Person>();
   data.value = response.list;
-  console.log("data", data.value);
+  console.log("data", data);
 };
 
 onMounted(() => getData());
