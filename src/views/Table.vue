@@ -16,7 +16,8 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { Person } from "@/module/person/person.model";
+import { Person } from "@/model/Person";
+import { getPersonListFromServer } from "@/api/person";
 
 const columns = Person.getColumns<Person>();
 console.log("columns", columns);
@@ -27,7 +28,7 @@ const pageChange = Person.pageChange;
 const config = Person.getConfig();
 
 const getData = async () => {
-  const response = await Person.getList<Person>();
+  const response = await Person.getList<Person>(getPersonListFromServer);
   data.value = response.list;
   console.log("data", data);
 };

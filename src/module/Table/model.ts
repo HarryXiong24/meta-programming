@@ -1,14 +1,13 @@
 import "reflect-metadata";
-import { TableBase, ColumnDecorator } from "./person.type";
-import { getConfigMap } from "../../utils/utils";
-import { getPersonListFromServer } from "./person.service";
+import { getConfigMap } from "@/utils/utils";
+
 import {
   ColumnPropertyConfig,
   columnConfig,
   TableColumn,
   ClassConfig,
   Record,
-} from "./person.type";
+} from "./type";
 import { Ref, ref } from "vue";
 
 export interface PersonConstraint {
@@ -16,7 +15,7 @@ export interface PersonConstraint {
   id: number;
   name: string;
   age: number;
-  sex: "male" | "female" | "unknow";
+  sex: "male" | "female" | "unknown";
   address: string;
 }
 
@@ -26,6 +25,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
   const tableConfigKey = Symbol("config");
 
   return function (Target: any) {
+    // 把 EnhancedTableClass 的静态方法全部设置到原型链上了
     return class EnhancedTableClass extends Target {
       constructor(data: any) {
         super(data);
@@ -56,8 +56,8 @@ export function EnhancedTableClass(config: ClassConfig): any {
       }
 
       // 获取表格数据
-      static async getList<T>(): Promise<Record<T>> {
-        const result = await getPersonListFromServer();
+      static async getList<T>(api: any): Promise<Record<T>> {
+        const result = await api();
 
         return {
           total: result.count,
@@ -72,77 +72,11 @@ export function EnhancedTableClass(config: ClassConfig): any {
       }
 
       // 分页切换时
-      static pageChange(pagination: any, pageSize: number): void {
+      static pageChange(pagination: any): void {
         const oldConfig: Ref<ClassConfig> =
           EnhancedTableClass.getConfig() as Ref<ClassConfig>;
         oldConfig.value.pagination = pagination;
       }
     };
   };
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-@EnhancedTableClass({
-  size: "middle",
-  bordered: true,
-  pagination: {
-    "show-less-items": true,
-    current: 1,
-    pageSize: 5,
-  },
-})
-export class Person extends TableBase implements PersonConstraint {
-  // ColumnDecorator 装饰器的作用是定义数据列的元数据
-  @ColumnDecorator({
-    title: "唯一标识",
-    dataIndex: "id",
-    key: "0",
-  })
-  id = 0;
-
-  @ColumnDecorator({
-    title: "姓名",
-    dataIndex: "name",
-    key: "1",
-  })
-  name = "";
-
-  @ColumnDecorator({
-    title: "年龄",
-    dataIndex: "age",
-    key: "2",
-  })
-  age = 0;
-
-  @ColumnDecorator({
-    title: "性别",
-    dataIndex: "sex",
-    key: "3",
-  })
-  sex: "male" | "female" | "unknow" = "unknow";
-
-  @ColumnDecorator({
-    title: "地址",
-    dataIndex: "address",
-    key: "4",
-  })
-  address = "";
-
-  @ColumnDecorator({
-    title: "key",
-    dataIndex: "key",
-    key: "5",
-  })
-  key: string | number = "0";
-
-  constructor({ key, id, name, age, sex, address }: PersonConstraint) {
-    super();
-    this.id = id;
-    this.key = key;
-    this.name = name;
-    this.age = age;
-    this.sex = sex;
-    this.address = address;
-  }
 }

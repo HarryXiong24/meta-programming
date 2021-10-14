@@ -40,7 +40,7 @@ export abstract class TableBase {
     return [];
   }
 
-  static async getList<T>(): Promise<Record<T>> {
+  static async getList<T>(api: any): Promise<Record<T>> {
     return { total: 0, list: [] };
   }
 
