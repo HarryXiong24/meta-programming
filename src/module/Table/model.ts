@@ -10,15 +10,6 @@ import {
 } from "./type";
 import { Ref, ref } from "vue";
 
-export interface PersonConstraint {
-  key: string | number;
-  id: number;
-  name: string;
-  age: number;
-  sex: "male" | "female" | "unknown";
-  address: string;
-}
-
 // 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的(实现TableBase抽象类)
 export function EnhancedTableClass(config: ClassConfig): any {
   const cacheColumnConfigKey = Symbol("cacheColumnConfigKey");
@@ -48,7 +39,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
       // 获取表格头
       static getColumns(): TableColumn[] {
         const list: TableColumn[] = [];
-        console.log("columnConfig", EnhancedTableClass.columnConfig);
+        // console.log("columnConfig", EnhancedTableClass.columnConfig);
         EnhancedTableClass.columnConfig.forEach((config) =>
           list.push(config as TableColumn)
         );
