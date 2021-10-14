@@ -68,7 +68,7 @@ export const getPersonListFromServer: () => any = async (): Promise<any> => {
             address: "山东省青岛市",
           },
           {
-            key: 8,
+            key: 9,
             id: 11,
             name: "timer",
             age: 22,
@@ -76,7 +76,7 @@ export const getPersonListFromServer: () => any = async (): Promise<any> => {
             address: "山东省青岛市",
           },
           {
-            key: 8,
+            key: 10,
             id: 11,
             name: "timer",
             age: 22,
@@ -86,6 +86,6 @@ export const getPersonListFromServer: () => any = async (): Promise<any> => {
         ],
         count: 10,
       });
-    }, 500);
+    }, 1);
   });
 };

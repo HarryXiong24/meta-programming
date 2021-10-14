@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { Person } from "@/model/Person";
+import { Person } from "@/model/Table/Person";
 import { getPersonListFromServer } from "@/api/person";
 
 const columns = Person.getColumns<Person>();
