@@ -1,4 +1,4 @@
-import { CreateProperDecorator } from "@/utils/utils";
+import { CreateProperDecorator } from "@/utils/metaTools";
 
 // 类装饰器的约束: 可以根据业务给类不同的数据
 export interface ClassConfig {
@@ -45,7 +45,7 @@ export abstract class TableBase {
     return [];
   }
 
-  static async getList<T>(api: any): Promise<Record<T>> {
+  static async getList<T>(api: any, condition = {}): Promise<Record<T>> {
     return { total: 0, list: [] };
   }
 

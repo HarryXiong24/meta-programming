@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { getConfigMap } from "@/utils/utils";
+import { getConfigMap } from "@/utils/metaTools";
 
 import {
   ColumnPropertyConfig,

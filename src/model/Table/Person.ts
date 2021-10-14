@@ -75,7 +75,15 @@ export class Person extends TableBase implements PersonConstraint {
   })
   operator = "";
 
-  constructor({ key, id, name, age, sex, address, operator }: PersonConstraint) {
+  constructor({
+    key,
+    id,
+    name,
+    age,
+    sex,
+    address,
+    operator,
+  }: PersonConstraint) {
     super();
     this.id = id;
     this.key = key;

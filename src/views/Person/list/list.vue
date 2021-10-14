@@ -22,18 +22,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, defineExpose } from "vue";
 import { Person } from "@/model/Table/Person";
 import { getPersonListAPI } from "@/api/person";
 
-// Person 表格
+// Person 列表数据
 const tableData = ref<Array<Person>>([]);
 const columns = Person.getColumns<Person>();
 const pageChange = Person.pageChange;
 const config = Person.getConfig();
 
-const getData = async () => {
-  const response = await Person.getList<Person>(getPersonListAPI);
+const loadData = async (condition?: any) => {
+  const response = await Person.getList<Person>(getPersonListAPI, condition);
   tableData.value = response.list;
   // console.log("data", tableData);
 };
@@ -50,5 +50,7 @@ const del = (record: any) => {
   console.log(record);
 };
 
-onMounted(() => getData());
+defineExpose({
+  loadData,
+});
 </script>
