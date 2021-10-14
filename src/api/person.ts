@@ -1,4 +1,4 @@
-export const getPersonListFromServer: () => any = async (): Promise<any> => {
+export const getPersonListAPI: () => any = async (): Promise<any> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
