@@ -93,4 +93,8 @@ export class Person extends TableBase implements PersonConstraint {
     this.address = address;
     this.operator = operator;
   }
+
+  static info(): void {
+    console.log('sd');
+  }
 }

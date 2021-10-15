@@ -1,17 +1,16 @@
 import "reflect-metadata";
 import { getConfigMap } from "@/utils/metaTools";
-
 import {
   ColumnPropertyConfig,
   columnConfig,
   TableColumn,
-  ClassConfig,
+  TableConfig,
   Record,
 } from "./type";
 import { Ref, ref } from "vue";
 
 // 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的(实现TableBase抽象类)
-export function EnhancedTableClass(config: ClassConfig): any {
+export function EnhancedTableClass(config: TableConfig): any {
   const cacheColumnConfigKey = Symbol("cacheColumnConfigKey");
   const tableConfigKey = Symbol("config");
 
@@ -22,7 +21,7 @@ export function EnhancedTableClass(config: ClassConfig): any {
         super(data);
         Reflect.defineMetadata(
           tableConfigKey,
-          ref<ClassConfig>(config),
+          ref<TableConfig>(config),
           Target
         );
       }
@@ -57,15 +56,15 @@ export function EnhancedTableClass(config: ClassConfig): any {
       }
 
       // 获取配置数据
-      static getConfig(): ClassConfig {
+      static getConfig(): TableConfig {
         const config = Reflect.getMetadata(tableConfigKey, Target);
         return config;
       }
 
       // 分页切换时
       static pageChange(pagination: any): void {
-        const oldConfig: Ref<ClassConfig> =
-          EnhancedTableClass.getConfig() as Ref<ClassConfig>;
+        const oldConfig: Ref<TableConfig> =
+          EnhancedTableClass.getConfig() as Ref<TableConfig>;
         console.log(oldConfig);
         oldConfig.value.pagination = pagination;
       }

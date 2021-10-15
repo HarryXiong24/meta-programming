@@ -1,7 +1,7 @@
 import { CreateProperDecorator } from "@/utils/metaTools";
 
 // 类装饰器的约束: 可以根据业务给类不同的数据
-export interface TableConfig {
+export interface FormConfig {
   size?: "middle" | "small";
   bordered?: boolean;
   pagination?: {
@@ -49,7 +49,7 @@ export abstract class TableBase {
     return { total: 0, list: [] };
   }
 
-  static getConfig: () => TableConfig;
+  static getConfig: () => ClassConfig;
 
   static pageChange: (pagination: any, pageSize: number) => void;
 }
