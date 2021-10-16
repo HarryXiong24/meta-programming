@@ -7,7 +7,12 @@ import {
 } from "./SessionStorage/type";
 import { CookieMode } from "./Cookie/model";
 import { CookieParma, CookieReturn } from "./Cookie/type";
+import { VuexMode } from "./Vuex/model";
+import { VuexParma, VuexReturn } from "./Vuex/type";
+
 abstract class StateBase {
+  static store: any;
+
   static useLocalStorage: <
     T extends "get" | "set" | "remove" | "clear" | "key" | "length"
   >(
@@ -26,10 +31,16 @@ abstract class StateBase {
     mode: T,
     ...args: CookieParma[T]
   ) => CookieReturn[T];
+
+  static useVuex: <T extends "get" | "set">(
+    mode: T,
+    ...args: VuexParma[T]
+  ) => VuexReturn[T];
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+@VuexMode({})
 @LocalStorageMode({})
 @SessionStorageMode({})
 @CookieMode({})
