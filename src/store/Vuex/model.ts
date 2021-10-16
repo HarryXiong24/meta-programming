@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { VuexConfig } from "./type";
 
 // 类装饰器
