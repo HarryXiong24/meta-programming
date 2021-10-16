@@ -14,4 +14,8 @@ console.log(State.useLocalStorage("get", "one"));
 // sessionStorage 用例
 State.useSessionStorage("set", "one", "session 1");
 console.log(State.useSessionStorage("get", "one"));
+
+// cookie 用例
+State.useCookie("set", "one", "cookie 1");
+console.log(State.useCookie("get", "one"));
 </script>
