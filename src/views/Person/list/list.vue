@@ -26,28 +26,19 @@ import { ref, defineExpose } from "vue";
 import { Person } from "./person.table";
 import { getPersonListAPI } from "@/api/person";
 
-// Person 列表数据
+// Person 列表数据和方法
 const tableData = ref<Array<Person>>([]);
 const columns = Person.getColumns<Person>();
 const pageChange = Person.pageChange;
 const config = Person.getConfig();
+const info = Person.info;
+const edit = Person.edit;
+const del = Person.del;
 
 const loadData = async (condition?: any) => {
   const response = await Person.getList<Person>(getPersonListAPI, condition);
   tableData.value = response.list;
   // console.log("data", tableData);
-};
-
-const info = (record: any) => {
-  console.log(record);
-};
-
-const edit = (record: any) => {
-  console.log(record);
-};
-
-const del = (record: any) => {
-  console.log(record);
 };
 
 defineExpose({

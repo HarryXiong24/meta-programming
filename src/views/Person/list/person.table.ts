@@ -94,7 +94,15 @@ export class Person extends TableBase implements PersonConstraint {
     this.operator = operator;
   }
 
-  static info(): void {
-    console.log('sd');
-  }
+  static info = (record?: any): any => {
+    console.log("Info", record);
+  };
+
+  static edit = (record?: any): any => {
+    console.log("Edit", record);
+  };
+
+  static del = (record?: any): any => {
+    console.log("Delete", record);
+  };
 }
