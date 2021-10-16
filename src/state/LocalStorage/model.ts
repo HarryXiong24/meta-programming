@@ -1,13 +1,14 @@
 import "reflect-metadata";
 import { ref } from "vue";
 
+// 用于做一些扩展，如是否加密
 export interface LocalStorageConfig {
   config?: any;
 }
 
 // 类装饰器
 export function LocalStorageMode(config: LocalStorageConfig): any {
-  const localStorageConfigKey = Symbol("LocalStorage");
+  const LocalStorageConfigKey = Symbol("LocalStorage");
 
   return function (Target: any) {
     // 把 EnhancedTableClass 的静态方法全部设置到原型链上了
@@ -15,7 +16,7 @@ export function LocalStorageMode(config: LocalStorageConfig): any {
       constructor(data: any) {
         super(data);
         Reflect.defineMetadata(
-          localStorageConfigKey,
+          LocalStorageConfigKey,
           ref<LocalStorageConfig>(config),
           Target
         );
@@ -23,7 +24,7 @@ export function LocalStorageMode(config: LocalStorageConfig): any {
 
       // 获取配置
       static get Config(): LocalStorageConfig {
-        const config = Reflect.getMetadata(localStorageConfigKey, Target);
+        const config = Reflect.getMetadata(LocalStorageConfigKey, Target);
         return config;
       }
 
