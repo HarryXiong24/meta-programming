@@ -7,7 +7,7 @@ export interface LocalStorageConfig {
 
 // 类装饰器
 export function LocalStorageMode(config: LocalStorageConfig): any {
-  const localStorageConfigKey = Symbol("config");
+  const localStorageConfigKey = Symbol("LocalStorage");
 
   return function (Target: any) {
     // 把 EnhancedTableClass 的静态方法全部设置到原型链上了
@@ -33,14 +33,14 @@ export function LocalStorageMode(config: LocalStorageConfig): any {
         value?: any
       ): any {
         if (mode === "get") {
-          LocalStorageClass.setLocalStorage(key, value);
+          return LocalStorageClass.getLocalStorage(key);
         }
         if (mode === "set") {
-          LocalStorageClass.getLocalStorage(value);
+          LocalStorageClass.setLocalStorage(key, value);
         }
       }
 
-      static setLocalStorage(key: string, value?: any): void {
+      static setLocalStorage(key: string, value: any): void {
         localStorage.setItem(key, value);
       }
 
