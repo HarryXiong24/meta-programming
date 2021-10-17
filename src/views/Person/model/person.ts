@@ -12,6 +12,8 @@ import {
   DescriptionsConfig,
   DescriptionsRecord,
 } from "@/module/Descriptions/type";
+import { EnhancedFormClass } from "@/module/Form/model";
+import { FormBase, FormConfig, FormRecord } from "@/module/Form/type";
 
 interface PersonConstraint {
   key: string | number;
@@ -23,7 +25,7 @@ interface PersonConstraint {
   operator: string;
 }
 
-abstract class PersonBase implements TableBase, DescriptionsBase {
+abstract class PersonBase implements TableBase, DescriptionsBase, FormBase {
   static getTableColumns: <T>() => TableColumn[];
   static getTableList: <T>(
     api: any,
@@ -36,6 +38,8 @@ abstract class PersonBase implements TableBase, DescriptionsBase {
     condition?: any
   ) => Promise<DescriptionsRecord<T>>;
   static getDescriptionsConfig: () => DescriptionsConfig;
+  static getFormList: <T>(api: any, condition?: any) => Promise<FormRecord<T>>;
+  static getFormConfig: () => FormConfig;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -54,10 +58,11 @@ abstract class PersonBase implements TableBase, DescriptionsBase {
   bordered: true,
   layout: "horizontal",
 })
+@EnhancedFormClass({})
 export default class Person extends PersonBase implements PersonConstraint {
   // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({
-    title: "唯一标识",
+    title: "ID",
     dataIndex: "id",
     key: "0",
   })

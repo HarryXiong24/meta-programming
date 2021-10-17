@@ -2,7 +2,7 @@
   <a-row justify="center">
     <a-col :span="20">
       <a-descriptions v-bind="config">
-        <a-descriptions-item label="唯一标识" :span="3">{{
+        <a-descriptions-item label="ID" :span="3">{{
           formData.id
         }}</a-descriptions-item>
         <a-descriptions-item label="key" :span="3">{{
