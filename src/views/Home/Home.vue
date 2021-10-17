@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="@/assets/logo.png" />
     <div class="hello">
-      <h1>Meta Coding</h1>
+      <h1>Metaprogramming</h1>
     </div>
   </div>
 </template>

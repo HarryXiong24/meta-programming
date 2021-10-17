@@ -1,7 +1,5 @@
 <template>
   <div class="table">
-    <h1>This is an table demo page</h1>
-    <h3>这是 Person 表格</h3>
     <a-row justify="center">
       <a-col :span="20">
         <a-table

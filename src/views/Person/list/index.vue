@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>This is a demo page</h1>
     <!-- <table-form @on-submit="loadData" @on-reset="loadData" /> -->
     <TableList ref="tableRef" />
   </div>
