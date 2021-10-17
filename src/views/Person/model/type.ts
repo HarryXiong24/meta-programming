@@ -3,13 +3,13 @@ import {
   TableBase,
   TableColumn,
   TableConfig,
-} from "@/module/Table/type";
+} from "@/models/Table/type";
 import {
   DescriptionsBase,
   DescriptionsConfig,
   DescriptionsRecord,
-} from "@/module/Descriptions/type";
-import { FormBase, FormConfig, FormRecord } from "@/module/Form/type";
+} from "@/models/Descriptions/type";
+import { FormBase, FormConfig, FormRecord } from "@/models/Form/type";
 
 export interface PersonConstraint {
   key: string | number;

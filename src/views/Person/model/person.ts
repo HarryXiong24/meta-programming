@@ -1,7 +1,7 @@
-import { ColumnDecorator } from "@/module/Table/type";
-import EnhancedTableClass from "@/module/Table/model";
-import EnhancedDescriptionsClass from "@/module/Descriptions/model";
-import EnhancedFormClass from "@/module/Form/model";
+import { ColumnDecorator } from "@/models/Table/type";
+import EnhancedTableClass from "@/models/Table/model";
+import EnhancedDescriptionsClass from "@/models/Descriptions/model";
+import EnhancedFormClass from "@/models/Form/model";
 import { PersonBase, PersonConstraint } from "./type";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
