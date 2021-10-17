@@ -2,8 +2,10 @@ import "reflect-metadata";
 import { DescriptionsConfig, DescriptionsRecord } from "./type";
 import { ref } from "vue";
 
-// 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的(实现TableBase抽象类)
-export function EnhancedDescriptionsClass(config: DescriptionsConfig): any {
+// 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的
+export default function EnhancedDescriptionsClass(
+  config: DescriptionsConfig
+): any {
   const DescriptionsConfigKey = Symbol("DescriptionsConfig");
 
   return function (Target: any) {

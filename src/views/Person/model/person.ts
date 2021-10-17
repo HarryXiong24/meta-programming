@@ -1,46 +1,8 @@
-import {
-  ColumnDecorator,
-  TableRecord,
-  TableBase,
-  TableColumn,
-  TableConfig,
-} from "@/module/Table/type";
-import { EnhancedTableClass } from "@/module/Table/model";
-import { EnhancedDescriptionsClass } from "@/module/Descriptions/model";
-import {
-  DescriptionsBase,
-  DescriptionsConfig,
-  DescriptionsRecord,
-} from "@/module/Descriptions/type";
-import { EnhancedFormClass } from "@/module/Form/model";
-import { FormBase, FormConfig, FormRecord } from "@/module/Form/type";
-
-interface PersonConstraint {
-  key: string | number;
-  id: number;
-  name: string;
-  age: number;
-  sex: "male" | "female" | "unknown";
-  address: string;
-  operator: string;
-}
-
-abstract class PersonBase implements TableBase, DescriptionsBase, FormBase {
-  static getTableColumns: <T>() => TableColumn[];
-  static getTableList: <T>(
-    api: any,
-    condition?: any
-  ) => Promise<TableRecord<T>>;
-  static getTableConfig: () => TableConfig;
-  static pageChange: (pagination: any, pageSize: number) => void;
-  static getDescriptionsList: <T>(
-    api: any,
-    condition?: any
-  ) => Promise<DescriptionsRecord<T>>;
-  static getDescriptionsConfig: () => DescriptionsConfig;
-  static getFormList: <T>(api: any, condition?: any) => Promise<FormRecord<T>>;
-  static getFormConfig: () => FormConfig;
-}
+import { ColumnDecorator } from "@/module/Table/type";
+import EnhancedTableClass from "@/module/Table/model";
+import EnhancedDescriptionsClass from "@/module/Descriptions/model";
+import EnhancedFormClass from "@/module/Form/model";
+import { PersonBase, PersonConstraint } from "./type";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

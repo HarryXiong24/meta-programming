@@ -13,12 +13,13 @@ export interface FormRecord<T> {
   form: any;
 }
 
-export interface FormBase {
-  name?: string;
-}
-// 表格抽象类
+// 定义静态类约束
 export interface FormStaticBase {
   new (): FormBase;
   getFormList: <T>(api: any, condition?: any) => Promise<FormRecord<T>>;
   getFormConfig: () => FormConfig;
+}
+
+export interface FormBase {
+  name?: string;
 }

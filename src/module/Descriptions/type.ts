@@ -15,10 +15,7 @@ export interface DescriptionsRecord<T> {
   form: any;
 }
 
-export interface DescriptionsBase {
-  name?: string;
-}
-// 表格抽象类
+// 定义静态类约束
 export interface DescriptionsStaticBase {
   new (): DescriptionsBase;
   getDescriptionsList: <T>(
@@ -26,4 +23,8 @@ export interface DescriptionsStaticBase {
     condition?: any
   ) => Promise<DescriptionsRecord<T>>;
   getDescriptionsConfig: () => DescriptionsConfig;
+}
+
+export interface DescriptionsBase {
+  name?: string;
 }

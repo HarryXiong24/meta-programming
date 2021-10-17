@@ -59,9 +59,9 @@ const goBack = () => {
 
 const onSubmit = (record?: any) => {
   console.log(record);
-  alert(`提交成功!`);
+  alert(`演示: 提交成功!`);
   router.push("/person/list");
-}
+};
 
 onMounted(() => {
   loadData();

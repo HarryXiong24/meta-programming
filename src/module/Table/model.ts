@@ -10,7 +10,7 @@ import {
 import { Ref, ref } from "vue";
 
 // 类装饰器, 处理通过装饰器收集上来的元数据, 扩展类的静态方法以及属性的(实现TableBase抽象类)
-export function EnhancedTableClass(config: TableConfig): any {
+export default function EnhancedTableClass(config: TableConfig): any {
   const cacheColumnConfigKey = Symbol("cacheColumnConfigKey");
   const tableConfigKey = Symbol("config");
 

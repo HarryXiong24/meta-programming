@@ -39,10 +39,7 @@ export const columnConfig = CreateProperDecorator<ColumnPropertyConfig>();
 // 拿到属性装饰器
 export const ColumnDecorator = columnConfig.properDecoratorFunc;
 
-export interface TableBase {
-  name?: string;
-}
-// 表格抽象类
+// 定义静态类约束
 export interface TableStaticBase {
   new (): TableBase;
 
@@ -53,4 +50,7 @@ export interface TableStaticBase {
   getTableConfig: () => TableConfig;
 
   pageChange: (pagination: any, pageSize: number) => void;
+}
+export interface TableBase {
+  name?: string;
 }

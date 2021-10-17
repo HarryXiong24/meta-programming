@@ -52,6 +52,7 @@ const edit = (record?: any): any => {
 
 const del = (record?: any): any => {
   console.log("Delete", record);
+  alert("演示: 删除成功!");
 };
 
 defineExpose({
