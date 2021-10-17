@@ -5,6 +5,7 @@ export interface FormConfig {
   labelAlign?: "left" | "right";
   rules?: any;
   labelCol?: any;
+  wrapperCol?: any;
 }
 
 // 后台返回字段约束

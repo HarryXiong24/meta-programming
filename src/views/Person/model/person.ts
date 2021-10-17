@@ -54,11 +54,14 @@ abstract class PersonBase implements TableBase, DescriptionsBase, FormBase {
   },
 })
 @EnhancedDescriptionsClass({
+  title: "详情页",
   size: "middle",
   bordered: true,
   layout: "horizontal",
 })
-@EnhancedFormClass({})
+@EnhancedFormClass({
+  name: "编辑页",
+})
 export default class Person extends PersonBase implements PersonConstraint {
   // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({

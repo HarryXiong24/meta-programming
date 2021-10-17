@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { getPersonListAPI } from "@/api/person";
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import Person from "../model/person";
 

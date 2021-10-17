@@ -37,7 +37,6 @@ const loadData = async (condition?: any) => {
     condition
   );
   tableData.value = response.list;
-  // console.log("data", tableData);
 };
 
 const router = useRouter();
@@ -48,6 +47,7 @@ const info = (record?: any): any => {
 
 const edit = (record?: any): any => {
   console.log("Edit", record);
+  router.push({ path: `/person/edit`, query: { id: record.id } });
 };
 
 const del = (record?: any): any => {
