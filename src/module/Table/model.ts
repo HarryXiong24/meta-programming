@@ -5,7 +5,7 @@ import {
   columnConfig,
   TableColumn,
   TableConfig,
-  Record,
+  TableRecord,
 } from "./type";
 import { Ref, ref } from "vue";
 
@@ -36,7 +36,7 @@ export function EnhancedTableClass(config: TableConfig): any {
       }
 
       // 获取表格头
-      static getColumns(): TableColumn[] {
+      static getTableColumns(): TableColumn[] {
         const list: TableColumn[] = [];
         // console.log("columnConfig", EnhancedTableClass.columnConfig);
         EnhancedTableClass.columnConfig.forEach((config) =>
@@ -46,7 +46,7 @@ export function EnhancedTableClass(config: TableConfig): any {
       }
 
       // 获取表格数据
-      static async getList<T>(api: any): Promise<Record<T>> {
+      static async getTableList<T>(api: any): Promise<TableRecord<T>> {
         const result = await api();
 
         return {
@@ -56,7 +56,7 @@ export function EnhancedTableClass(config: TableConfig): any {
       }
 
       // 获取配置数据
-      static getConfig(): TableConfig {
+      static getTableConfig(): TableConfig {
         const config = Reflect.getMetadata(tableConfigKey, Target);
         return config;
       }

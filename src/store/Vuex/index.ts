@@ -12,7 +12,7 @@ export default createStore({
   actions: {
     _action_one({ commit }, data) {
       commit("_mutation_one", data);
-    }
+    },
   },
   modules: {},
 });

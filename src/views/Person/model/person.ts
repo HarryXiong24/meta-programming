@@ -1,7 +1,19 @@
-import { ColumnDecorator, TableBase } from "@/module/Table/type";
+import {
+  ColumnDecorator,
+  TableRecord,
+  TableBase,
+  TableColumn,
+  TableConfig,
+} from "@/module/Table/type";
 import { EnhancedTableClass } from "@/module/Table/model";
+import { EnhancedDescriptionsClass } from "@/module/Descriptions/model";
+import {
+  DescriptionsBase,
+  DescriptionsConfig,
+  DescriptionsRecord,
+} from "@/module/Descriptions/type";
 
-export interface PersonConstraint {
+interface PersonConstraint {
   key: string | number;
   id: number;
   name: string;
@@ -9,6 +21,18 @@ export interface PersonConstraint {
   sex: "male" | "female" | "unknown";
   address: string;
   operator: string;
+}
+
+abstract class PersonBase implements TableBase, DescriptionsBase {
+  static getTableColumns: <T>() => TableColumn[];
+  static getTableList: <T>(api: any, condition?: any) => Promise<TableRecord<T>>;
+  static getTableConfig: () => TableConfig;
+  static pageChange: (pagination: any, pageSize: number) => void;
+  static getDescriptionsList: <T>(
+    api: any,
+    condition?: any
+  ) => Promise<DescriptionsRecord<T>>;
+  static getDescriptionsConfig: () => DescriptionsConfig;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -22,7 +46,12 @@ export interface PersonConstraint {
     pageSize: 5,
   },
 })
-export class Person extends TableBase implements PersonConstraint {
+@EnhancedDescriptionsClass({
+  size: "middle",
+  bordered: true,
+  layout: "horizontal",
+})
+export class Person extends PersonBase implements PersonConstraint {
   // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({
     title: "唯一标识",

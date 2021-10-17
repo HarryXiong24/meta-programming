@@ -21,20 +21,20 @@
 
 <script lang="ts" setup>
 import { ref, defineExpose } from "vue";
-import { Person } from "./person.table";
+import { Person } from "../model/person";
 import { getPersonListAPI } from "@/api/person";
 
 // Person 列表数据和方法
 const tableData = ref<Array<Person>>([]);
-const columns = Person.getColumns<Person>();
+const columns = Person.getTableColumns<Person>();
 const pageChange = Person.pageChange;
-const config = Person.getConfig();
+const config = Person.getTableConfig();
 const info = Person.info;
 const edit = Person.edit;
 const del = Person.del;
 
 const loadData = async (condition?: any) => {
-  const response = await Person.getList<Person>(getPersonListAPI, condition);
+  const response = await Person.getTableList<Person>(getPersonListAPI, condition);
   tableData.value = response.list;
   // console.log("data", tableData);
 };

@@ -13,7 +13,7 @@ export interface TableConfig {
 }
 
 // 后台返回字段约束
-export interface Record<T> {
+export interface TableRecord<T> {
   total: number;
   list: T[];
 }
@@ -39,17 +39,18 @@ export const columnConfig = CreateProperDecorator<ColumnPropertyConfig>();
 // 拿到属性装饰器
 export const ColumnDecorator = columnConfig.properDecoratorFunc;
 
+export interface TableBase {
+  name?: string;
+}
 // 表格抽象类
-export abstract class TableBase {
-  static getColumns<T>(): TableColumn[] {
-    return [];
-  }
+export interface TableStaticBase {
+  new (): TableBase;
 
-  static async getList<T>(api: any, condition = {}): Promise<Record<T>> {
-    return { total: 0, list: [] };
-  }
+  getTableColumns: <T>() => TableColumn[];
 
-  static getConfig: () => TableConfig;
+  getTableList: <T>(api: any, condition?: any) => Promise<TableRecord<T>>;
 
-  static pageChange: (pagination: any, pageSize: number) => void;
+  getTableConfig: () => TableConfig;
+
+  pageChange: (pagination: any, pageSize: number) => void;
 }
