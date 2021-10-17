@@ -64,7 +64,7 @@ export function EnhancedTableClass(config: TableConfig): any {
       // 分页切换时
       static pageChange(pagination: any): void {
         const oldConfig: Ref<TableConfig> =
-          EnhancedTableClass.getConfig() as Ref<TableConfig>;
+          EnhancedTableClass.getTableConfig() as Ref<TableConfig>;
         console.log(oldConfig);
         oldConfig.value.pagination = pagination;
       }

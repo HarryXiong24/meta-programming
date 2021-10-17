@@ -21,6 +21,9 @@ export interface DescriptionsBase {
 // 表格抽象类
 export interface DescriptionsStaticBase {
   new (): DescriptionsBase;
-  getDescriptionsList: <T>(api: any, condition?: any) => Promise<DescriptionsRecord<T>>;
+  getDescriptionsList: <T>(
+    api: any,
+    condition?: any
+  ) => Promise<DescriptionsRecord<T>>;
   getDescriptionsConfig: () => DescriptionsConfig;
 }

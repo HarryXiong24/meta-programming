@@ -18,7 +18,9 @@ export function EnhancedDescriptionsClass(config: DescriptionsConfig): any {
         );
       }
 
-      static async getDescriptionsList<T>(api: any): Promise<DescriptionsRecord<T>> {
+      static async getDescriptionsList<T>(
+        api: any
+      ): Promise<DescriptionsRecord<T>> {
         const result = await api();
 
         return {

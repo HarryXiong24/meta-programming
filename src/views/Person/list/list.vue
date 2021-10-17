@@ -21,22 +21,37 @@
 
 <script lang="ts" setup>
 import { ref, defineExpose } from "vue";
-import { Person } from "../model/person";
+import Person from "../model/person";
 import { getPersonListAPI } from "@/api/person";
+import { useRouter } from "vue-router";
 
 // Person 列表数据和方法
 const tableData = ref<Array<Person>>([]);
 const columns = Person.getTableColumns<Person>();
 const pageChange = Person.pageChange;
 const config = Person.getTableConfig();
-const info = Person.info;
-const edit = Person.edit;
-const del = Person.del;
 
 const loadData = async (condition?: any) => {
-  const response = await Person.getTableList<Person>(getPersonListAPI, condition);
+  const response = await Person.getTableList<Person>(
+    getPersonListAPI,
+    condition
+  );
   tableData.value = response.list;
   // console.log("data", tableData);
+};
+
+const router = useRouter();
+const info = (record?: any): any => {
+  console.log("Info", record);
+  router.push({ path: `/person/info`, query: { id: record.id } });
+};
+
+const edit = (record?: any): any => {
+  console.log("Edit", record);
+};
+
+const del = (record?: any): any => {
+  console.log("Delete", record);
 };
 
 defineExpose({

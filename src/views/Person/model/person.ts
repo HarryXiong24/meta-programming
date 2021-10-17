@@ -25,7 +25,10 @@ interface PersonConstraint {
 
 abstract class PersonBase implements TableBase, DescriptionsBase {
   static getTableColumns: <T>() => TableColumn[];
-  static getTableList: <T>(api: any, condition?: any) => Promise<TableRecord<T>>;
+  static getTableList: <T>(
+    api: any,
+    condition?: any
+  ) => Promise<TableRecord<T>>;
   static getTableConfig: () => TableConfig;
   static pageChange: (pagination: any, pageSize: number) => void;
   static getDescriptionsList: <T>(
@@ -51,7 +54,7 @@ abstract class PersonBase implements TableBase, DescriptionsBase {
   bordered: true,
   layout: "horizontal",
 })
-export class Person extends PersonBase implements PersonConstraint {
+export default class Person extends PersonBase implements PersonConstraint {
   // ColumnDecorator 装饰器的作用是定义数据列的元数据
   @ColumnDecorator({
     title: "唯一标识",
@@ -122,16 +125,4 @@ export class Person extends PersonBase implements PersonConstraint {
     this.address = address;
     this.operator = operator;
   }
-
-  static info = (record?: any): any => {
-    console.log("Info", record);
-  };
-
-  static edit = (record?: any): any => {
-    console.log("Edit", record);
-  };
-
-  static del = (record?: any): any => {
-    console.log("Delete", record);
-  };
 }
